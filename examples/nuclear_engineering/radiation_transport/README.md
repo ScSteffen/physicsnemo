@@ -9,7 +9,7 @@ using a physics-informed loss that combines region-weighted MSE with a
 quantity-of-interest (QoI) penalty based on absorption in key regions.
 
 The dataset used for this example was generated using
-[KiT-RT](https://github.com/KiT-RT) [^1], and can be found on Hugging Face:
+[KiT-RT](https://github.com/KiT-RT) (Kusch et al., 2023), and can be found on Hugging Face:
 [Linear Radiation Transport][hf-rte].
 
 [hf-rte]: https://huggingface.co/datasets/nvidia/Linear-Radiation-Transport
@@ -41,7 +41,7 @@ either **absorber** (high `σ_a`, low `σ_s`), **scatterer** (low `σ_a`, high
 discontinuities at material interfaces and reproduce the integrated
 absorption in the absorbing regions.
 
-**QoI** — matches **QoI-3** of the reference paper (Kusch et al. 2025, §3.1):
+**QoI** — matches **QoI-3** of the reference paper (Schotthöfer et al. 2025, §3.1):
 the final-time radiation absorption over the absorbing blocks `B`:
 
 $$\mathrm{QoI}_{\mathrm{Lattice}} = \int_{B} \sigma_a(x)\,\phi(x, T)\,dx.$$
@@ -61,7 +61,7 @@ interior heat source — flux enters from boundary conditions and propagates
 through the cavity. Geometry parameters (upper/lower laser-entry radii,
 center offsets) vary across simulations.
 
-**QoI** — variation of **QoI-2** of the reference paper (Kusch et al.
+**QoI** — variation of **QoI-2** of the reference paper (Schotthöfer et al.
 2025, §3.2): per-material final-time absorption, evaluated separately
 over each of three regions `S ∈ {G ∪ B, R, K}`:
 
@@ -474,9 +474,15 @@ so case-specific overrides propagate automatically.
 
 ## References
 
+## References
+
 [^1]: Kusch, J., Schotthöfer, S., Stammer, P., Wolters, J., & Xiao, T. (2023).
 "KiT-RT: An extendable framework for radiative transfer and therapy."
 *ACM Transactions on Mathematical Software*, **49**(4), 1–24.
+
+[^2]: Schotthoefer, S., & Hauck, C. (2025).
+"Reference solutions for linear radiation transport: the Hohlraum and Lattice benchmarks."
+*arXiv preprint arXiv:2505.17284*.
 
 ```bibtex
 @article{kitrt2023,
@@ -489,5 +495,15 @@ so case-specific overrides propagate automatically.
   pages     = {1--24},
   year      = {2023},
   publisher = {ACM New York, NY}
+}
+
+@misc{schotthoefer2025reference,
+  title         = {Reference solutions for linear radiation transport: the Hohlraum and Lattice benchmarks},
+  author        = {Schotthoefer, Steffen and Hauck, Cory},
+  year          = {2025},
+  eprint        = {2505.17284},
+  archivePrefix = {arXiv},
+  primaryClass  = {physics.comp-ph},
+  url           = {https://arxiv.org/abs/2505.17284}
 }
 ```
