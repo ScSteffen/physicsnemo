@@ -3,14 +3,14 @@
 A PhysicsNeMo example that trains a [Transolver](https://arxiv.org/abs/2402.02366)
 surrogate model for the 2-D linear radiation transport benchmark defined in
 [Reference solutions for linear radiation transport: the Hohlraum and Lattice
-benchmarks](https://arxiv.org/pdf/2505.17284). The pipeline learns the
+benchmarks](https://arxiv.org/pdf/2505.17284).[^2] The pipeline learns the
 final-time mapping from the initial flux snapshot to the final scalar flux,
 using a physics-informed training objective that can combine void/material-
 weighted MSE with a quantity-of-interest (QoI) penalty based on absorption in
 key regions.
 
 The dataset used for this example was generated using
-[KiT-RT](https://github.com/KiT-RT) (Kusch et al., 2023), curated into the
+[KiT-RT](https://github.com/KiT-RT),[^1] curated into the
 PhysicsNeMo `Mesh` format, and published on Hugging Face:
 [Linear Radiation Transport][hf-rte].
 
@@ -76,7 +76,7 @@ $$\mathrm{QoI}_{\mathrm{Hohlraum}, S} = \int_{S} \sigma_a(x)\,\phi(x, T)\,dx.$$
 
 In the PhysicsNeMo evaluator, the three regions are labeled
 `cur_absorption_{center, vertical, horizontal}` and each is computed as
-`Σ_{c ∈ S} σ_a,c · φ_c · A_c`. 
+`Σ_{c ∈ S} σ_a,c · φ_c · A_c`.
 
 The training-time physics loss evaluates relative-squared-error losses for
 the three component absorptions and adds a fourth `total` loss on the sum
@@ -163,7 +163,8 @@ via `mesh.cell_centroids` and `mesh.cell_areas`.
 | `sigma_a`, `sigma_s`, `sigma_t` | `(N,)` | float32 | absorption / scattering / total cross-section |
 | `Q` | `(N,)` | float32 | particle source; non-zero in lattice source cells, zero in hohlraum |
 
-`Mesh.global_data`: the loader consumes only `sim_time` (shape `(2,)`, simulation time of each flux snapshot). 
+`Mesh.global_data`: the loader consumes only `sim_time` (shape `(2,)`,
+simulation time of each flux snapshot).
 Other simulation diagnostics shipped with the data (`cur_absorption`,
 `total_absorption`, `mass`, ...) are ignored at training time, but may be
 useful for other downstream tasks.
@@ -512,7 +513,8 @@ so case-specific overrides propagate automatically.
 }
 
 @misc{schotthoefer2025reference,
-  title         = {Reference solutions for linear radiation transport: the Hohlraum and Lattice benchmarks},
+  title         = {Reference solutions for linear radiation transport:
+                   the Hohlraum and Lattice benchmarks},
   author        = {Schotthoefer, Steffen and Hauck, Cory},
   year          = {2025},
   eprint        = {2505.17284},
